@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Connection test document
+    match /test/connection {
+      allow read: if true;
+    }
+
+    // Signalements collection
+    match /signalements/{signalementId} {
+      allow read: if true;
+      allow create: if isValidId(signalementId) &&
+        incoming().commune is string && incoming().commune.size() <= 100 &&
+        incoming().quartier is string && incoming().quartier.size() <= 100 &&
+        incoming().description is string && incoming().description.size() <= 2500;
+      allow update: if isValidId(signalementId);
+      allow delete: if request.auth != null;
+    }
+
+    // Missions collection
+    match /missions/{missionId} {
+      allow read: if true;
+      allow create, update: if isValidId(missionId);
+      allow delete: if request.auth != null;
+    }
+
+    // Evaluations collection
+    match /evaluations/{evaluationId} {
+      allow read: if true;
+      allow create, update: if isValidId(evaluationId);
+      allow delete: if request.auth != null;
+    }
+
+    // User private settings (e.g. for Google Sheet & Drive preferences)
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      match /{subPath=**} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+  }
+}

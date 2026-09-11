@@ -1,0 +1,11 @@
+{
+  "name": "EWaste mobile RDC ",
+  "description": "Application d\u0027analyses des déchets, de signalement des dépotoirs, suivi assainissement, EIES et évaluation environnementale, guide tri et éducation environnemental et reporting instantané en RDC. Ewastemobile est une application mobile créer par Environnement-Plus pour faciliter la gestion durable des ordures et sensibiliser les citoyens locaux d\u0027où EWaste mobile ",
+  "requestFramePermissions": [
+    "geolocation",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

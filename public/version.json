@@ -1,0 +1,24 @@
+{
+  "version": "3.0.3",
+  "buildTime": 1788874500000,
+  "releaseDate": "2026-09-11T02:55:00.000Z",
+  "appName": "EWaste Mobile RDC (ewastemobile.ai.studio)",
+  "organization": "Ets ENVIRONNEMENT-PLUS RDC",
+  "officialEmail": "environnementplusrdc@gmail.com",
+  "forceUpdate": true,
+  "cacheBuster": "v3.0.3-universal-terminal-sync-20260911",
+  "changelog": [
+    "Mise à jour universelle instantanée déployée sur tous les terminaux, navigateurs et APK téléchargés",
+    "Purge automatique de tous les caches Service Worker obsolètes et réactivation forcée du client",
+    "Retrait du bouton de mise à jour citoyen : centralisation totale gérée par l'Administrateur Principal",
+    "Sécurisation robuste de l'espace administrateur / inspecteurs avec gateway masquée et double preuve caméra directe"
+  ],
+  "modules": {
+    "universalSync": true,
+    "pwaAutoRefresh": true,
+    "strictAdminControl": true,
+    "cameraOnlyAntiFraud": true,
+    "hiddenAdminGateway": true,
+    "lightProfessionalTheme": true
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "entities": {
+    "Signalement": {
+      "title": "Signalement",
+      "description": "Signalement d'un dépotoir sauvage ou problème de déchets",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100 },
+        "commune": { "type": "string", "maxLength": 100 },
+        "quartier": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 2000 },
+        "severity": { "type": "string", "enum": ["Critique", "Élevé", "Modéré"] },
+        "status": { "type": "string", "enum": ["Signalé", "En cours", "Nettoyé"] },
+        "imageUrl": { "type": "string", "maxLength": 2000 },
+        "date": { "type": "string", "maxLength": 50 },
+        "author": { "type": "string", "maxLength": 100 },
+        "coordinates": { "type": "string", "maxLength": 100 },
+        "tonnageEstime": { "type": "number" },
+        "userId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "maxLength": 100 },
+        "updatedAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["commune", "quartier", "description", "severity", "status"]
+    },
+    "Mission": {
+      "title": "Mission",
+      "description": "Mission d'assainissement et brigade Ets ENVIRONNEMENT-PLUS",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100 },
+        "title": { "type": "string", "maxLength": 200 },
+        "commune": { "type": "string", "maxLength": 100 },
+        "startDate": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["Planifié", "En cours", "Terminé"] },
+        "team": { "type": "string", "maxLength": 100 },
+        "tonsCollected": { "type": "number" },
+        "description": { "type": "string", "maxLength": 2000 },
+        "createdAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["title", "commune", "status"]
+    },
+    "EvaluationEnv": {
+      "title": "EvaluationEnv",
+      "description": "Évaluation environnementale d'une commune",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 100 },
+        "commune": { "type": "string", "maxLength": 100 },
+        "auditor": { "type": "string", "maxLength": 100 },
+        "date": { "type": "string", "maxLength": 50 },
+        "salubriteScore": { "type": "number" },
+        "drainageScore": { "type": "number" },
+        "sensibilisationScore": { "type": "number" },
+        "commentaires": { "type": "string", "maxLength": 2000 },
+        "createdAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["commune", "auditor", "salubriteScore"]
+    }
+  },
+  "firestore": {
+    "/signalements/{signalementId}": {
+      "schema": "Signalement",
+      "description": "Collection publique des signalements de dépotoirs"
+    },
+    "/missions/{missionId}": {
+      "schema": "Mission",
+      "description": "Missions de collecte et d'assainissement Ets ENVIRONNEMENT-PLUS"
+    },
+    "/evaluations/{evaluationId}": {
+      "schema": "EvaluationEnv",
+      "description": "Évaluations de conformité environnementale par commune"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad512" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#064e3b" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad512)"/>
+  <g fill="none" stroke="#ffffff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" transform="translate(64, 50)">
+    <path d="M192 40 L260 160 L124 160 Z" fill="#ffffff" fill-opacity="0.15"/>
+    <path d="M192 50 L270 180 M270 180 L240 220 M270 180 L310 180" />
+    <path d="M320 220 L250 345 M250 345 L280 375 M250 345 L210 360" />
+    <path d="M65 220 L190 355 M190 355 L160 385 M190 355 L170 315" />
+    <circle cx="192" cy="192" r="36" fill="#34d399" stroke="#ffffff" stroke-width="10"/>
+  </g>
+  <text x="256" y="450" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="4">E-WASTE RDC</text>
+</svg>

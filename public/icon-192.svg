@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#065f46" />
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" rx="42" fill="url(#bgGrad)"/>
+  <!-- Modern Recycling & Clean Waste Symbol -->
+  <g fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" transform="translate(24, 24)">
+    <path d="M72 20 L96 62 L48 62 Z" fill="#ffffff" fill-opacity="0.15"/>
+    <path d="M72 24 L100 70 M100 70 L90 85 M100 70 L115 70" />
+    <path d="M120 85 L95 130 M95 130 L105 140 M95 130 L80 135" />
+    <path d="M25 85 L72 135 M72 135 L62 145 M72 135 L65 120" />
+    <circle cx="72" cy="72" r="14" fill="#34d399" stroke="#ffffff" stroke-width="4"/>
+  </g>
+  <text x="96" y="168" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1">E-WASTE</text>
+</svg>
