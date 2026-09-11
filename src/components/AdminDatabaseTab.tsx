@@ -59,6 +59,7 @@ interface AdminDatabaseTabProps {
   onOpenGoogleWorkspace?: () => void;
   userRole?: UserRole;
   onChangeUserRole?: (role: UserRole) => void;
+  onOpenApkModal?: () => void;
 }
 
 type CollectionView = 'activity' | 'broadcast' | 'signalements' | 'missions' | 'paiements' | 'evaluations' | 'agents' | 'security' | 'audit';
@@ -72,7 +73,8 @@ export function AdminDatabaseTab({
   googleUser,
   onOpenGoogleWorkspace = () => {},
   userRole,
-  onChangeUserRole = () => {}
+  onChangeUserRole = () => {},
+  onOpenApkModal = () => {}
 }: AdminDatabaseTabProps) {
   // Authentication Gate State
   const [isAdminUnlocked, setIsAdminUnlocked] = useState<boolean>(() => {
@@ -561,6 +563,7 @@ export function AdminDatabaseTab({
       {activeCollection === 'security' && (
         <AdminSecuritySection 
           isPrincipalAdmin={isPrincipalAdmin}
+          onOpenApkModal={onOpenApkModal}
           onSecurityLog={(action, details) => {
             addAdminAuditLog({
               adminUser: googleUser?.email || 'Administrateur Principal',

@@ -16,7 +16,11 @@ import {
   ShieldAlert, 
   Info,
   FileSpreadsheet,
-  ExternalLink
+  ExternalLink,
+  Download,
+  Smartphone,
+  Laptop,
+  Monitor
 } from 'lucide-react';
 import { SecondaryAdminKey } from '../types';
 import { 
@@ -37,11 +41,13 @@ import {
 interface AdminSecuritySectionProps {
   isPrincipalAdmin: boolean;
   onSecurityLog?: (action: string, details: string) => void;
+  onOpenApkModal?: () => void;
 }
 
 export function AdminSecuritySection({ 
   isPrincipalAdmin = true,
-  onSecurityLog 
+  onSecurityLog,
+  onOpenApkModal = () => {}
 }: AdminSecuritySectionProps) {
   // Password change states
   const [currentMasterPass, setCurrentMasterPass] = useState('');
@@ -642,6 +648,69 @@ export function AdminSecuritySection({
           </p>
         </div>
       )}
+
+      {/* Téléchargement Applications Officielles (Android, iOS, Windows PC) */}
+      <div className="bg-gradient-to-br from-emerald-900 to-emerald-950 text-white rounded-3xl p-6 shadow-xl space-y-4">
+        <div className="flex items-center space-x-3">
+          <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl text-emerald-300">
+            <Download className="w-6 h-6" />
+          </div>
+          <div>
+            <h3 className="text-base font-bold text-white">Téléchargement & Distribution (Android, iOS & Windows PC)</h3>
+            <p className="text-xs text-emerald-200">Packages et liens d'installation officiels pour l'ensemble des terminaux et postes de travail (ewastemobile.ai.studio)</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+          {/* Android APK */}
+          <button
+            type="button"
+            onClick={onOpenApkModal}
+            className="bg-white/10 hover:bg-white/20 border border-white/20 p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition group cursor-pointer"
+          >
+            <div className="p-2.5 bg-emerald-600 text-white rounded-xl group-hover:scale-110 transition-transform">
+              <Smartphone className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-white">Android APK (v3.0.3)</p>
+              <p className="text-[10px] text-emerald-300">Smartphones & Tablettes RDC</p>
+            </div>
+            <span className="text-[10px] bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full font-semibold">Télécharger .APK</span>
+          </button>
+
+          {/* iOS Safari */}
+          <button
+            type="button"
+            onClick={() => alert("Pour installer sur iPhone / iPad (iOS) : Ouvrez ewastemobile.ai.studio dans Safari, touchez le bouton Partager ⎋ puis sélectionnez 'Sur l'écran d'accueil'.")}
+            className="bg-white/10 hover:bg-white/20 border border-white/20 p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition group cursor-pointer text-left"
+          >
+            <div className="p-2.5 bg-sky-600 text-white rounded-xl group-hover:scale-110 transition-transform">
+              <Laptop className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-white">iOS / iPhone & iPad</p>
+              <p className="text-[10px] text-sky-200">Installation Safari Web App</p>
+            </div>
+            <span className="text-[10px] bg-sky-500/30 text-sky-200 px-2.5 py-0.5 rounded-full font-semibold">Guide d'installation iOS</span>
+          </button>
+
+          {/* Windows PC Desktop */}
+          <button
+            type="button"
+            onClick={() => alert("Pour installer sur Windows PC ou Mac : Ouvrez Chrome, Edge ou Safari, cliquez sur le menu (⋮) et sélectionnez 'Installer EWaste Mobile' ou 'Créer un raccourci bureau'.")}
+            className="bg-white/10 hover:bg-white/20 border border-white/20 p-4 rounded-2xl flex flex-col items-center text-center space-y-2 transition group cursor-pointer text-left"
+          >
+            <div className="p-2.5 bg-blue-600 text-white rounded-xl group-hover:scale-110 transition-transform">
+              <Monitor className="w-5 h-5" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-white">Windows PC & Mac</p>
+              <p className="text-[10px] text-blue-200">Application de Bureau PWA</p>
+            </div>
+            <span className="text-[10px] bg-blue-500/30 text-blue-200 px-2.5 py-0.5 rounded-full font-semibold">Installer sur Bureau</span>
+          </button>
+        </div>
+      </div>
 
       {/* Modal: Generate New Key */}
       {showAddKeyModal && (

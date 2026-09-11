@@ -88,11 +88,22 @@ export function Navbar({
 }: NavbarProps) {
   const [showRoleModal, setShowRoleModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [modalMode, setModalMode] = useState<'brigade' | 'admin'>('brigade');
+  const [showSpaceSelector, setShowSpaceSelector] = useState(false);
+  const [modalMode, setModalMode] = useState<'brigade' | 'admin' | 'inspection'>('brigade');
   const [passcodeInput, setPasscodeInput] = useState('');
   const [authError, setAuthError] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
   const [logoClicks, setLogoClicks] = useState(0);
+  const [selectorClicks, setSelectorClicks] = useState(0);
+
+  const handleThreeClickTrigger = () => {
+    const next = selectorClicks + 1;
+    setSelectorClicks(next);
+    if (next >= 3) {
+      setSelectorClicks(0);
+      setShowSpaceSelector(true);
+    }
+  };
 
   // 1. Éco-Citoyen Navigation Items (Strict Scope: Scanner + Signalement unifié, Paiement taxe salubrité, Sensibilisation & Formation - AUCUNE BDD NI REPORTING)
   const citizenNavItems = [
@@ -161,22 +172,22 @@ export function Navbar({
 
     const cleanInput = passcodeInput.trim();
 
-    if (modalMode === 'brigade') {
+    if (modalMode === 'brigade' || modalMode === 'inspection') {
       const lower = cleanInput.toLowerCase();
-      if (lower === 'regedek' || lower === 'brigade' || lower === 'superviseur' || lower === '2026' || lower === 'environnementplus') {
+      if (lower === 'regedek' || lower === 'brigade' || lower === 'superviseur' || lower === 'inspection' || lower === 'controle' || lower === '2026' || lower === 'environnementplus') {
         onChangeUserRole('institutionnel');
         setShowRoleModal(false);
         setPasscodeInput('');
-        onNavigate('assainissement');
+        onNavigate(modalMode === 'inspection' ? 'evaluation' : 'assainissement');
       } else {
         await recordSecurityAccessLog({
           identity: authSession?.displayName || authSession?.identifier || 'Anonyme',
-          targetSpace: 'BRIGADIER',
-          action: 'TENTATIVE_DEVERROUILLAGE_BRIGADE_ECHOUEE',
+          targetSpace: modalMode === 'inspection' ? 'INSPECTEUR' : 'BRIGADIER',
+          action: 'TENTATIVE_DEVERROUILLAGE_ECHOUEE',
           status: 'BLOQUÉ',
-          reason: "Code d'accès brigade incorrect. Accès bloqué et journalisé."
+          reason: "Code d'accès incorrect. Accès bloqué et journalisé."
         });
-        setAuthError("Code d'accès brigade incorrect. Accès bloqué et journalisé dans la base centrale.");
+        setAuthError("Code d'accès incorrect. Accès bloqué et journalisé.");
       }
       setIsVerifying(false);
       return;
@@ -256,7 +267,16 @@ export function Navbar({
                   ewastemobile.ai.studio
                 </span>
               </div>
-              <p className="text-[10px] text-gray-500 font-medium hidden sm:block">Ets ENVIRONNEMENT-PLUS RDC</p>
+              <p 
+                className="text-[10px] text-gray-500 font-medium hidden sm:block cursor-pointer select-none hover:text-emerald-800 transition"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleThreeClickTrigger();
+                }}
+                title="Passerelle sécurisée agents"
+              >
+                Ets ENVIRONNEMENT-PLUS RDC
+              </p>
             </div>
             {/* Discreet lock button for informed admin/inspectors */}
             <button
@@ -593,6 +613,111 @@ export function Navbar({
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Sélecteur d'espace sécurisé (3-click trigger) */}
+      {showSpaceSelector && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-gray-200 space-y-4 animate-in fade-in zoom-in-95">
+            <div className="flex items-center space-x-3 border-b border-gray-100 pb-3">
+              <div className="p-2.5 rounded-2xl bg-slate-900 text-amber-300">
+                <ShieldAlert className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-gray-900">Passerelle d'Accès Sécurisé</h3>
+                <p className="text-xs text-gray-500">Ets ENVIRONNEMENT-PLUS RDC • Espaces Restreints</p>
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-600 leading-relaxed">
+              Sélectionnez l'espace opérationnel autorisé. Chaque accès nécessite une accréditation ou un code d'autorisation préalable de l'administrateur principal.
+            </p>
+
+            <div className="space-y-2.5 pt-1">
+              {/* 1. Accréditation, Contrôle & Inspections */}
+              <button
+                type="button"
+                onClick={() => {
+                  setShowSpaceSelector(false);
+                  setModalMode('inspection');
+                  setPasscodeInput('');
+                  setAuthError('');
+                  setShowRoleModal(true);
+                }}
+                className="w-full text-left p-3.5 rounded-2xl border border-amber-200 bg-amber-50/50 hover:bg-amber-100/80 transition flex items-center justify-between group cursor-pointer"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-amber-700 text-white rounded-xl">
+                    <ShieldCheck className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-amber-950">Accréditation, Contrôle & Inspections</p>
+                    <p className="text-[11px] text-amber-800">Évaluations environnementales & ÉIES</p>
+                  </div>
+                </div>
+                <Lock className="w-4 h-4 text-amber-700 group-hover:scale-110 transition" />
+              </button>
+
+              {/* 2. Brigade d'Assainissement */}
+              <button
+                type="button"
+                onClick={() => {
+                  setShowSpaceSelector(false);
+                  setModalMode('brigade');
+                  setPasscodeInput('');
+                  setAuthError('');
+                  setShowRoleModal(true);
+                }}
+                className="w-full text-left p-3.5 rounded-2xl border border-sky-200 bg-sky-50/50 hover:bg-sky-100/80 transition flex items-center justify-between group cursor-pointer"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-sky-700 text-white rounded-xl">
+                    <Trash2 className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-sky-950">Brigade d'Assainissement</p>
+                    <p className="text-[11px] text-sky-800">Suivi des curages, missions & interventions</p>
+                  </div>
+                </div>
+                <Lock className="w-4 h-4 text-sky-700 group-hover:scale-110 transition" />
+              </button>
+
+              {/* 3. Direction Générale (Admin) */}
+              <button
+                type="button"
+                onClick={() => {
+                  setShowSpaceSelector(false);
+                  setModalMode('admin');
+                  setPasscodeInput('');
+                  setAuthError('');
+                  setShowRoleModal(true);
+                }}
+                className="w-full text-left p-3.5 rounded-2xl border border-red-200 bg-red-50/50 hover:bg-red-100/80 transition flex items-center justify-between group cursor-pointer"
+              >
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 bg-red-700 text-white rounded-xl">
+                    <Activity className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-red-950">Direction Générale (Administration)</p>
+                    <p className="text-[11px] text-red-800">Console centrale, sécurité & déploiement OTA</p>
+                  </div>
+                </div>
+                <Lock className="w-4 h-4 text-red-700 group-hover:scale-110 transition" />
+              </button>
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => setShowSpaceSelector(false)}
+                className="w-full py-2.5 text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-xl transition"
+              >
+                Fermer la passerelle
+              </button>
+            </div>
           </div>
         </div>
       )}

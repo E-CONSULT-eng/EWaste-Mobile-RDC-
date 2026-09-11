@@ -1105,6 +1105,7 @@ export default function App() {
                 onOpenGoogleWorkspace={() => setShowWorkspaceModal(true)}
                 userRole={userRole}
                 onChangeUserRole={setUserRole}
+                onOpenApkModal={() => setShowApkModal(true)}
               />
             ) : (
               <div className="bg-white rounded-2xl border border-gray-200 p-8 max-w-lg mx-auto text-center space-y-4">

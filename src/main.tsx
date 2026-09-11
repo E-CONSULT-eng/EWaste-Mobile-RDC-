@@ -39,7 +39,27 @@ if ('serviceWorker' in navigator) {
     // When controller changes (new SW took control), dispatch event
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       console.log('[SW] Controller changed: new version active');
-      window.dispatchEvent(new CustomEvent('regedek_sw_updated'));
+      window.location.reload();
     });
   });
 }
+
+// Periodic background check for version updates (every 3 minutes) for continuous publication & sync
+setInterval(async () => {
+  try {
+    const res = await fetch('/version.json?t=' + Date.now(), { cache: 'no-store' });
+    if (res.ok) {
+      const data = await res.json();
+      const localVersion = localStorage.getItem('ewaste_system_version');
+      if (localVersion && localVersion !== data.version) {
+        console.log('[OTA Sync] New version detected:', data.version);
+        localStorage.setItem('ewaste_system_version', data.version);
+        window.location.reload();
+      } else if (!localVersion) {
+        localStorage.setItem('ewaste_system_version', data.version);
+      }
+    }
+  } catch (err) {
+    // Offline mode or network unreachable - continue normally
+  }
+}, 180000);
