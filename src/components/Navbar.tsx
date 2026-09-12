@@ -247,10 +247,7 @@ export function Navbar({
               setLogoClicks(next);
               if (next >= 3) {
                 setLogoClicks(0);
-                setModalMode('brigade');
-                setPasscodeInput('');
-                setAuthError('');
-                setShowRoleModal(true);
+                setShowSpaceSelector(true);
               } else {
                 onNavigate('scanner-signalement');
               }
@@ -268,31 +265,11 @@ export function Navbar({
                 </span>
               </div>
               <p 
-                className="text-[10px] text-gray-500 font-medium hidden sm:block cursor-pointer select-none hover:text-emerald-800 transition"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleThreeClickTrigger();
-                }}
-                title="Passerelle sécurisée agents"
+                className="text-[10px] text-gray-500 font-medium hidden sm:block select-none"
               >
                 Ets ENVIRONNEMENT-PLUS RDC
               </p>
             </div>
-            {/* Discreet lock button for informed admin/inspectors */}
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setModalMode('admin');
-                setPasscodeInput('');
-                setAuthError('');
-                setShowRoleModal(true);
-              }}
-              className="absolute -right-6 top-1 text-gray-300 hover:text-emerald-700 p-1 opacity-0 group-hover:opacity-100 transition"
-              title="Accès Administrateur Restreint"
-            >
-              <Lock className="w-3.5 h-3.5" />
-            </button>
           </div>
 
           {/* Center Interface Badge - Strictly compliant with role scope */}
@@ -321,20 +298,6 @@ export function Navbar({
 
           {/* Header Controls (Right) */}
           <div className="flex items-center space-x-1.5 sm:space-x-2">
-            {/* Online Update & Auto-Sync System Automation Button (ewastemobile.ai.studio) - Restricted to admin/institutional */}
-            {userRole !== 'citoyen' && (
-              <button
-                type="button"
-                onClick={() => setShowUpdateModal(true)}
-                className="flex items-center space-x-1 sm:space-x-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold transition cursor-pointer group shadow-2xs"
-                title="Système automatisé : synchronisation continue, mise à jour en ligne & réinitialisation (ewastemobile.ai.studio)"
-              >
-                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
-                <RefreshCw className="w-3.5 h-3.5 text-emerald-700 group-hover:rotate-180 transition-transform duration-500" />
-                <span className="hidden md:inline">Auto-Sync & MàJ</span>
-                <span className="text-[10px] bg-emerald-700 text-white font-mono px-1.5 py-0.2 rounded font-bold">v3.0</span>
-              </button>
-            )}
 
             {/* Online / Offline Status Badge */}
             <button 

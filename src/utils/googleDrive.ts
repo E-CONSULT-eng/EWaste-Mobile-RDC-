@@ -157,8 +157,8 @@ export async function saveActionLogToDrive(
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const fileName = `EWaste_Action_${actionType}_${timestamp}.json`;
     const content = JSON.stringify({
-      app: "EWaste Mobile RDC (ewastemobile.ai.studio)",
-      portal: "https://ewastemobile.ai.studio",
+      app: "EWaste Mobile RDC (ewastemobilerdc.netlify.app)",
+      portal: "https://ewastemobilerdc.netlify.app",
       action: actionType,
       timestamp: new Date().toISOString(),
       data: payload

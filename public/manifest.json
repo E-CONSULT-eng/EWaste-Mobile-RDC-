@@ -1,7 +1,7 @@
 {
   "short_name": "EWaste Mobile",
-  "name": "EWaste Mobile RDC (ewastemobile.ai.studio)",
-  "description": "Portail officiel ewastemobile.ai.studio - Scan IA des déchets, signalement des dépotoirs, assainissement, ÉIES et reporting RDC",
+  "name": "EWaste Mobile RDC (ewastemobilerdc.netlify.app)",
+  "description": "Portail officiel ewastemobilerdc.netlify.app - Scan IA des déchets, signalement des dépotoirs, assainissement, ÉIES et reporting RDC",
   "icons": [
     {
       "src": "/icon-192.svg",

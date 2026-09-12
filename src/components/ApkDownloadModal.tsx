@@ -134,10 +134,10 @@ export function ApkDownloadModal({ isOpen, onClose }: ApkDownloadModalProps) {
     const apkManifest = {
       package: "cd.environnementplus.ewastemobile",
       name: "EWaste Mobile RDC",
-      webPortal: "https://ewastemobile.ai.studio",
-      version: "2.1.0",
-      versionCode: 210,
-      description: "Application officielle ewastemobile.ai.studio de gestion des déchets, ÉIES, assainissement et signalement en RDC",
+      webPortal: "https://ewastemobilerdc.netlify.app",
+      version: "3.0.4",
+      versionCode: 304,
+      description: "Application officielle ewastemobilerdc.netlify.app de gestion des déchets, ÉIES, assainissement et signalement en RDC",
       author: "Ets ENVIRONNEMENT-PLUS RDC",
       targetSdkVersion: 34,
       minSdkVersion: 24,
@@ -449,7 +449,7 @@ export function ApkDownloadModal({ isOpen, onClose }: ApkDownloadModalProps) {
               </div>
               <div className="bg-white border border-gray-100 p-3 rounded-xl">
                 <span className="text-gray-400 block text-[10px] uppercase font-bold">Portail Web</span>
-                <span className="font-mono text-emerald-800 text-[11px] font-semibold">ewastemobile.ai.studio</span>
+                <span className="font-mono text-emerald-800 text-[11px] font-semibold">ewastemobilerdc.netlify.app</span>
               </div>
             </div>
           </div>
@@ -489,7 +489,7 @@ export function ApkDownloadModal({ isOpen, onClose }: ApkDownloadModalProps) {
               <ul className="space-y-2 text-xs text-gray-600">
                 <li className="flex items-center space-x-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span><strong>Nom de l'application :</strong> EWaste Mobile RDC (ewastemobile.ai.studio)</span>
+                  <span><strong>Nom de l'application :</strong> EWaste Mobile RDC (ewastemobilerdc.netlify.app)</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />

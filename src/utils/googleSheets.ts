@@ -239,8 +239,8 @@ export async function sendActionToGoogleAppsScript(
   try {
     const payload = {
       type: actionType,
-      app: "EWaste Mobile RDC (ewastemobile.ai.studio)",
-      portal: "https://ewastemobile.ai.studio",
+      app: "EWaste Mobile RDC (ewastemobilerdc.netlify.app)",
+      portal: "https://ewastemobilerdc.netlify.app",
       timestamp: new Date().toISOString(),
       ...actionData
     };
@@ -325,7 +325,7 @@ export async function createEwasteFullDatabase(
     throw new Error("Authentification Google requise. Veuillez vous connecter avec votre compte Google.");
   }
 
-  const title = customTitle || `EWaste Mobile RDC (ewastemobile.ai.studio) - Base de Données Nationale (${new Date().toLocaleDateString('fr-FR')})`;
+  const title = customTitle || `EWaste Mobile RDC (ewastemobilerdc.netlify.app) - Base de Données Nationale (${new Date().toLocaleDateString('fr-FR')})`;
 
   // Définition des 6 onglets avec leurs en-têtes préformatés
   const sheetsPayload = Object.entries(SHEET_HEADERS).map(([sheetTitle, headers]) => ({
@@ -382,9 +382,9 @@ export async function createEwasteFullDatabase(
   // Journaliser la création dans l'audit stream
   await logActivityToSheet(
     'INITIALISATION_BASE',
-    'Système EWaste Mobile (ewastemobile.ai.studio)',
+    'Système EWaste Mobile (ewastemobilerdc.netlify.app)',
     'RDC (National)',
-    `Base de données complète initialisée et liée à ${OFFICIAL_ADMIN_EMAIL} (portail ewastemobile.ai.studio) avec 6 onglets : ${Object.keys(SHEET_HEADERS).join(', ')}`
+    `Base de données complète initialisée et liée à ${OFFICIAL_ADMIN_EMAIL} (portail ewastemobilerdc.netlify.app) avec 6 onglets : ${Object.keys(SHEET_HEADERS).join(', ')}`
   );
 
   return { id: spreadsheetId, url: spreadsheetUrl, title };
