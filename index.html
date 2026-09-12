@@ -1,26 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EWaste Mobile • ewastemobile.ai.studio</title>
-    <meta name="description" content="Plateforme officielle ewastemobile.ai.studio - Scan intelligent des déchets par IA, signalement des dépotoirs, suivi d'assainissement, ÉIES, formation environnementale et reporting instantané avec synchronisation Google Sheets & Drive en RDC" />
-    <meta property="og:title" content="EWaste Mobile • ewastemobile.ai.studio" />
-    <meta property="og:description" content="Plateforme officielle ewastemobile.ai.studio - Scan intelligent des déchets par IA, signalement des dépotoirs, suivi d'assainissement, ÉIES, formation environnementale et reporting instantané avec synchronisation Google Sheets & Drive en RDC" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#059669" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="EWaste Mobile" />
-    <link rel="apple-touch-icon" href="/icon-192.svg" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="EWaste Mobile" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EWaste Mobile RDC</title>
 
+  <!-- 🔗 Lien vers le manifest -->
+  <link rel="manifest" href="manifestation.json">
+
+  <!-- ⚙️ Enregistrement du service worker -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js")
+        .then(() => console.log("Service Worker enregistré"))
+        .catch(error => console.error("Erreur Service Worker:", error));
+    }
+  </script>
+</head>
+<body>
+  <h1>Bienvenue sur EWaste Mobile RDC</h1>
+  <p>Application de gestion durable des déchets.</p>
+</body>
+</html>
