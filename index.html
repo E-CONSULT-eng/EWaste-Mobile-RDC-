@@ -3,22 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EWaste Mobile RDC</title>
-
-  <!-- 🔗 Lien vers le manifest -->
-  <link rel="manifest" href="manifestation.json">
-
-  <!-- ⚙️ Enregistrement du service worker -->
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js")
-        .then(() => console.log("Service Worker enregistré"))
-        .catch(error => console.error("Erreur Service Worker:", error));
-    }
-  </script>
+  <title>EWaste Mobile RDC • ewastemobilerdc.netlify.app</title>
+  <meta name="description" content="Portail officiel ewastemobilerdc.netlify.app - Scan IA des déchets, signalement des dépotoirs, assainissement, ÉIES et reporting RDC" />
+  <meta property="og:title" content="EWaste Mobile RDC • ewastemobilerdc.netlify.app" />
+  <meta property="og:description" content="Portail officiel ewastemobilerdc.netlify.app - Scan IA des déchets, signalement des dépotoirs, assainissement, ÉIES et reporting RDC" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#059669" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="EWaste Mobile" />
+  <link rel="apple-touch-icon" href="/icon-192.svg" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="EWaste Mobile" />
 </head>
-<body>
-  <h1>Bienvenue sur EWaste Mobile RDC</h1>
-  <p>Application de gestion durable des déchets.</p>
+<body class="bg-gray-50 text-gray-900 antialiased selection:bg-emerald-500 selection:text-white">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 </html>
